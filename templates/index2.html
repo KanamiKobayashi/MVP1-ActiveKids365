@@ -1,0 +1,58 @@
+{% extends "base2.html" %}
+{% block content %}
+<center>
+<div style="text-align:center;">
+    <font size="4">Choose csv file to save in SQL.</font><hr>   
+        
+        <form action = "./" method = "POST" enctype = "multipart/form-data">
+            <input type="file" name="csv" accept="csv"><br><br>
+            <input type="submit" value="Send">
+
+        <form action="" method="POST"></form>
+</div>
+
+{% if err_message %}
+<hr>
+<center><font size="5" color=red><b>{{ err_message }}</b></font></center>
+<hr>
+{% endif %}
+
+{% if results %}
+<hr>
+<center>
+    <font size="5" color=red><b>{{ message }}</b></font><br>Table from SQL<font size="2">
+        <table border="1" align="center" width=600>
+            <tr>
+                <th>id</th>
+                <th>place</th>
+                <th>indoor</th>
+                <th>category</th>
+                <th>age</th>
+                <th>address</th>
+                <th>photo</th>
+                <th>web</th>
+                <th>latitude</th>
+                <th>longitude</th>
+                <th>locations</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.id }}</td>
+                <td>{{ result.place }}</td>
+                <td>{{ result.indoor }}</td>
+                <td>{{ result.category }}</td>
+                <td>{{ result.age }}</td>
+                <td>{{ result.address }}</td>
+                <td>{{ result.photo }}</td>
+                <td>{{ result.web }}</td>
+                <td>{{ result.latitude }}</td>
+                <td>{{ result.longitude }}</td>
+                <td>{{ result.locations }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </font>
+</center><br>
+{% endif %}
+
+{% endblock %}

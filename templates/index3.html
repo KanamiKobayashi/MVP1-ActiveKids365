@@ -1,0 +1,66 @@
+{% extends "base3.html" %}
+{% block content %}
+<center>
+<div style="text-align:center;">
+<font size="4">Add kids play ground!:</font>
+<hr>   
+        
+<form action="./" method="post" enctype = "multipart/form-data">
+    <p>
+    place：<input type="text" name="place" value="no data" size="40" maxlength="20"><br>
+    indoor：<input type="text" name="indoor" value="no data" size="40" maxlength="20"><br>
+    category：<input type="text" name="category" value="no data" size="40" maxlength="20"><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;age：<input type="text" name="age" value="no data" size="40" maxlength="20"><br>
+    address：<input type="text" name="address" value="no data" size="40" maxlength="20"><br>
+    &nbsp;&nbsp;&nbsp;photo：<input type="text" name="photo" value="no data" size="40" maxlength="20"><br>
+    web：<input type="text" name="web" value="no data" size="40" maxlength="20"><br>
+    latitude：<input type="text" name="latitude" value="no data" size="40" maxlength="20"><br>
+    longitude：<input type="text" name="longitude" value="no data" size="40" maxlength="20"><br>
+    locations：<input type="text" name="locations" value="no data" size="40" maxlength="20"><br>
+    </p>
+<input type="submit" value="Save">
+</form>
+    
+<form action="" method="POST"></form>
+</div>
+
+{% if results %}
+<hr>
+<center><font size="5" color=red><b>{{ message }}</b></font><br>
+Table from SQL
+    <font size="2">
+    <table border="1" align="center" width=600>
+        <tr>
+            <th>id</th>
+            <th>place</th>
+            <th>indoor</th>
+            <th>category</th>
+            <th>age</th>
+            <th>address</th>
+            <th>photo</th>
+            <th>web</th>
+            <th>latitude</th>
+            <th>longitude</th>
+            <th>locations</th>
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{ result.id }}</td>
+            <td>{{ result.place }}</td>
+            <td>{{ result.indoor }}</td>
+            <td>{{ result.category }}</td>
+            <td>{{ result.age }}</td>
+            <td>{{ result.address }}</td>
+            <td>{{ result.photo }}</td>
+            <td>{{ result.web }}</td>
+            <td>{{ result.latitude }}</td>
+            <td>{{ result.longitude }}</td>
+            <td>{{ result.locations }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </font>
+    </center><br>
+{% endif %}
+
+{% endblock %}

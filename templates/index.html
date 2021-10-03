@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+<!--日時表示-->
+    {% if today%}
+    <font size="4">
+        <div><b>{{ today }}</b></div>
+    </font>
+    {% endif %}
+<hr>
+<!--天気表示-->
+<center>
+{% if location %}
+<font size="5">
+    <div><b>{{ location }} weather</b><br></div>
+    <div>{{ weather }}<br><img src="{{ filepath }}"><br></div>
+    <div>Current temperature: {{ temperature }}℃<br></div>
+    <!--Temp max: {{ temp_max }}℃<br>
+    Temp min: {{ temp_min }}℃<br>-->
+</font>
+{% endif %}
+
+<hr> 
+<div style="text-align:center;">
+<font size="5">
+<b>Where do you want to go?</b>
+</font>  
+        
+<form action="./" method="post">
+    <font size="5">Place：<select name="place_name">
+    <option value="Kids World Play">Kids World Play</option>
+    <option value="Mindarie Park">Mindarie Park</option>
+    <option value="Planet Mino">Planet Mino</option>
+    <option value="The Canopy Playground">The Canopy Playground</option>
+    <option value="Hallstrom Park">Hallstrom Park</option>
+    <option value="Willoughby Leisure Centre">Willoughby Leisure Centre</option>
+    <option value="Hammond Playground">Hammond Playground</option>
+    <option value="North Sydney Playground">North Sydney Playground</option>
+    <option value="Waverton Park">Waverton Park</option>
+    <option value="Chatswood Park">Chatswood Park</option>
+    <option value="Lane Cove Aquatic Leisure Centre">Lane Cove Aquatic Leisure Centre</option>
+    </select></font>
+    <br><br>
+
+<input type="submit" value="Send">
+</form>
+<br>
+</div>
+</center>
+<!--テーブル表示-->
+{% if place_name %}
+<center>
+
+Table form CSV file
+{{ table | safe }}
+<hr>
+</center>
+{% endif %}
+
+{% if err_message_2 %}
+<center><font size="5" color=red><b>{{ err_message_2 }}</b></font></center>
+<hr>
+{% endif %}
+
+<!-- 画像を表示 -->
+{% if filepath_img %}
+<center>
+<img src="{{ filepath_img }}" style="margin-top: 10px; vertical-align: bottom; width: 300px"><br>
+<hr>
+{% endif %}
+</center>
+
+<center>
+{% if map_path %}
+<iframe src="{{ map_path }}" width="600" height="400"></iframe>
+{% endif %}
+</center>
+
+<!-- SQLデータベースから表示 -->
+{% if results %}
+<center>Table from SQL
+    <font size="2">
+    <table border="1" align="center" width=600>
+        <tr>
+            <th>id</th>
+            <th>place</th>
+            <th>indoor</th>
+            <th>category</th>
+            <th>age</th>
+            <th>address</th>
+            <th>photo</th>
+            <th>web</th>
+            <th>latitude</th>
+            <th>longitude</th>
+            <th>locations</th>
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{ result.id }}</td>
+            <td>{{ result.place }}</td>
+            <td>{{ result.indoor }}</td>
+            <td>{{ result.category }}</td>
+            <td>{{ result.age }}</td>
+            <td>{{ result.address }}</td>
+            <td>{{ result.photo }}</td>
+            <td>{{ result.web }}</td>
+            <td>{{ result.latitude }}</td>
+            <td>{{ result.longitude }}</td>
+            <td>{{ result.locations }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </font>
+    </center>
+{% endif %}
+<hr>  
+{% endblock %}
