@@ -1,6 +1,6 @@
 # MVP1-Activekids365
 
-This app is for searching play ground near you.
+This app is for searching for playground near you.
 
 This is MVP1 version including weather API, forium map and Sqlite3 database.
 
